@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Syook - Assignment 1</title>
 
@@ -9,6 +10,9 @@
     <meta name="title" content="Syook - Assignment 1">
     <meta name="description" content="Simple page to take your notes">
 
+    <!-- Shorcut Icon / Favicon -->
+    <link rel="shortcut icon" href="/favicon.icon" />
+
     <!-- External styles -->
     <link rel="stylesheet" href="css/style.css">
 
@@ -16,17 +20,52 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <!-- Header -->
-    <header><h2>Simple page to take your notes</h2></header>
+    <header>
+        <h2>Simple page to take your notes</h2>
+    </header>
 
     <!-- Main Container -->
     <div class="main-container">
-        
+        <div class="form-main">
+            <h3>Add Note</h3>
+            <div class="form-item">
+                <label for="title">Title</label>
+                <div>
+                    <input type="text" id="title" name="title" value="" />
+                </div>
+            </div>
+            <div class="form-item">
+                <label for="description">Description</label>
+                <textarea rows="3" id="description" name="description" value=""></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit" onclick="addnote()">Add</button>
+        </div>
+        <div class="list-main">
+            <h3>Notes</h3>
+            <ul>
+                <li>
+                    <div class="content">
+                        <h3>Title</h3>
+                        <p>This is dummy description</p>
+                    </div>
+                    <div class="action-main">
+                        <span class="action edit-note">Edit</span>
+                        <span class="action delete-note">Delete</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </body>
+<script type="text/javascript">
+    function addnote() {
+        alert(123);
+        return;
+    }
+</script>
+
 </html>
-
-
-
