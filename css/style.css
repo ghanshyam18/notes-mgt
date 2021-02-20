@@ -137,6 +137,11 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.list-main .list-title > h3 {
+    margin: 0;
 }
 
 .list-main .add-new-note {
@@ -147,7 +152,7 @@ textarea {
 }
 
 .list-main .search-main {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     width: 100%;
 }
 
