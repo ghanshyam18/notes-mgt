@@ -24,7 +24,7 @@ header {
     display: flex;
     align-items: center;
     padding: 25px;
-    /* justify-content: center; */
+    justify-content: center;
     height: 65px;
     width: 100%;
     background-color: #eee;
@@ -60,7 +60,8 @@ textarea {
 
 .main-container {
     padding: 50px;
-    height: calc(100% - 65px);
+    max-width: 1000px;
+    margin: 0 auto;
     display: flex;
     align-items: flex-start;
 }
@@ -140,7 +141,7 @@ textarea {
     margin-bottom: 20px;
 }
 
-.list-main .list-title > h3 {
+.list-main .list-title>h3 {
     margin: 0;
 }
 
@@ -175,22 +176,27 @@ textarea {
     padding: 15px;
     margin-bottom: 10px;
     border-radius: 5px;
+    border-bottom: 4px solid #53429b;
 }
 
 .list-main ul>li .action-main {
     margin-top: 10px;
     display: flex;
     align-items: center;
-    /* justify-content: flex-end; */
 }
 
 .list-main ul>li .action {
-    font-size: 13px;
+    font-size: 20px;
     color: #53429b;
     text-decoration: underline;
     padding: 3px;
     cursor: pointer;
     margin-right: 5px;
+}
+
+
+.list-main ul>li .action.edit-note {
+    margin-top: 2px;
 }
 
 .list-main ul>li .action.delete-note {

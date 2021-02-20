@@ -8,13 +8,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="title" content="Syook - Assignment 1">
-    <meta name="description" content="Manage you notes">
+    <meta name="description" content="Manage your notes">
 
     <!-- Shorcut Icon / Favicon -->
     <link rel="shortcut icon" href="/favicon.icon" />
 
     <!-- External styles -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- External Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- External Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -161,15 +164,14 @@
             noteList.innerHTML = "";
             notesAry.forEach((note) => {
                 const li = document.createElement('li');
-                li.setAttribute('data-id', note.id);
                 li.innerHTML = `
                 <div class="content">
                     <h3>${note.title}</h3>
                     <p>${note.desc}</p>
                 </div>
                 <div class="action-main">
-                    <span onclick={editNote(${note.id})} class="action edit-note">Edit</span>
-                    <span onclick={deleteNote(${note.id})} class="action delete-note">Delete</span>
+                    <span onclick={editNote(${note.id})} class="action edit-note"><i class="fa fa-edit"></i></span>
+                    <span onclick={deleteNote(${note.id})} class="action delete-note"><i class="fa fa-trash-o"></i></span>
                 </div>
             `;
                 noteList.appendChild(li);
@@ -190,7 +192,7 @@
                 return;
             } else if (notes.findIndex((n, i) => i !== nIndex && n.title.toLowerCase() === title.value.trim()
                     .toLowerCase()) > -1) {
-                alert("Note already exist! Please try with different title");
+                alert("This note already exist! Please try with different title");
                 return;
             }
 
