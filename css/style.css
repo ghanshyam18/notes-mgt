@@ -8,6 +8,7 @@ body {
 }
 
 body {
+    background-color: #f9f9f9;
     margin: 0;
     font-family: "Roboto", sans-serif;
 }
@@ -22,18 +23,28 @@ ul {
 header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    padding: 25px;
+    /* justify-content: center; */
     height: 65px;
     width: 100%;
     background-color: #eee;
     color: #444;
 }
 
+input,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-family: "Roboto", sans-serif;
+}
+
 .btn {
     box-shadow: none;
     padding: 10px 20px;
     font-size: 14px;
-    border: 1px solid #eee;
+    border: 1px solid #e0e0e0;
     border-radius: 4px;
     font-weight: 500;
     min-width: 100px;
@@ -48,7 +59,6 @@ header {
 }
 
 .main-container {
-    background-color: #f9f9f9;
     padding: 50px;
     height: calc(100% - 65px);
     display: flex;
@@ -62,14 +72,31 @@ header {
     -moz-box-shadow: 0px 0px 10px 0px rgba(206, 206, 206, 1);
     background: white;
     border-top: 5px solid #53429b;
-    width: 350px;
+    width: 400px;
     max-width: 100%;
     padding: 20px;
 }
 
-.form-main>h3 {
+.form-main .note-title-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-top: 5px;
     margin-bottom: 25px
+}
+
+.form-main>button:not(:last-child) {
+    margin-right: 5px;
+}
+
+.form-main .note-title-main>h3 {
+    margin: 0;
+}
+
+.form-main .note-title-main #close-form-btn {
+    cursor: pointer;
+    padding: 5px;
+    display: none;
 }
 
 .form-item {
@@ -82,17 +109,16 @@ header {
     font-size: 13px;
 }
 
-.form-item input,
-.form-item textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-family: "Roboto", sans-serif;
-}
-
 .form-item textarea {
     resize: none;
+}
+
+.form-main .btn-cancel {
+    display: none;
+}
+
+.form-main.edit-form .btn-cancel {
+    display: inline-block;
 }
 
 .form-main .btn {
@@ -102,33 +128,58 @@ header {
 
 /* List Styles */
 .list-main {
-    padding: 0px 35px;
-    max-height: 500px;
+    margin-left: 35px;
+    width: 450px;
+    max-width: 100%;
 }
 
-.list-main > h3 {
-    margin-top: 0px;
+.list-main .list-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.list-main ul > li {
+.list-main .add-new-note {
+    font-size: 14px;
+    color: #53429b;
+    cursor: pointer;
+    display: none;
+}
+
+.list-main .search-main {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.list-main>div {
+    padding: 0px 10px;
+}
+
+.list-main>ul {
+    max-height: 450px;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.list-main ul>li {
     box-shadow: 0px 0px 10px 0px rgba(206, 206, 206, 1);
     -webkit-box-shadow: 0px 0px 10px 0px rgba(206, 206, 206, 1);
     -moz-box-shadow: 0px 0px 10px 0px rgba(206, 206, 206, 1);
     background: white;
-    width: 350px;
-    max-width: 100%;
+    width: 100%;
     padding: 15px;
+    margin-bottom: 10px;
     border-radius: 5px;
 }
 
-.list-main ul > li .action-main {
+.list-main ul>li .action-main {
     margin-top: 10px;
     display: flex;
     align-items: center;
     /* justify-content: flex-end; */
 }
 
-.list-main ul > li .action {
+.list-main ul>li .action {
     font-size: 13px;
     color: #53429b;
     text-decoration: underline;
@@ -137,17 +188,75 @@ header {
     margin-right: 5px;
 }
 
-.list-main ul > li .action.delete-note {
+.list-main ul>li .action.delete-note {
     color: red;
 }
 
-.list-main ul > li h3 {
+.list-main ul>li h3 {
     margin: 0;
     margin-bottom: 7px;
     font-size: 15px;
 }
 
-.list-main ul > li p {
+.list-main ul>li p {
     margin: 0px;
     font-size: 14px;
+}
+
+
+@media only screen and (max-width: 767px) {
+    header {
+        padding: 0 25px;
+    }
+
+    .main-container {
+        padding: 15px 0px 0px;
+    }
+
+    .list-main {
+        padding: 0 15px;
+        margin-left: 0px;
+    }
+
+    .form-main {
+        display: none;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+    }
+
+    .form-main .note-title-main #close-form-btn {
+        display: inline-block;
+    }
+
+    .form-main .btn-cancel {
+        display: inline-block;
+    }
+
+    .form-main.show {
+        display: block;
+    }
+
+    .list-main .add-new-note {
+        display: inline-block;
+    }
+
+    .list-main ul>li {
+        width: 100%;
+    }
+
+    .list-main .search-main {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+    header {
+        padding: 0 15px;
+    }
+
+    .list-main {
+        padding: 0px 15px;
+    }
 }
