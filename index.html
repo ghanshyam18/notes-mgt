@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="title" content="Manage your notes">
-    <meta name="description" content="Manage your notes">
+    <meta name="description" content="This is just simple page to manage notes">
 
     <!-- Shorcut Icon / Favicon -->
     <link rel="shortcut icon" href="/favicon.icon" />
@@ -16,7 +16,7 @@
     <!-- External styles -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- External Icons -->
+    <!-- External Fontawesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- External Google Fonts -->
@@ -33,6 +33,8 @@
 
     <!-- Main Container -->
     <section class="main-container">
+
+        <!-- Note's Form -->
         <div id="note-form" class="form-main">
             <div class="note-title-main">
                 <h3 id="note-title">Add Note</h3>
@@ -51,6 +53,8 @@
             <button id="note-btn" class="btn btn-primary" type="submit" onclick="addnote()">Add</button>
             <button id="note-cancel-btn" class="btn btn-cancel">Cancel</button>
         </div>
+
+        <!-- Note's List -->
         <div class="list-main">
             <div class="list-title">
                 <h3>Notes</h3><span onclick="addNewNote()" class="add-new-note">+ Add New</span>
@@ -101,6 +105,7 @@
             }
         }
 
+        // Display Note's Form
         function addNewNote() {
             noteFormAction("show");
         }
@@ -150,7 +155,7 @@
             const nIndex = notes.findIndex((note) => note.id === id);
 
             if (notes[nIndex].is_update) {
-                alert("Can\"t delete this note because it is in edit mode");
+                alert("Can\'t delete this note because it is in edit mode");
                 return;
             }
 
@@ -174,26 +179,26 @@
             notesAry.forEach((note) => {
                 const li = document.createElement("li");
                 const desc = note.desc.length > 130 ? note.desc.substring(0, 130) : note.desc;
-                const moreTxt = note.desc.length > 130 ? note.desc.substring(131, note.desc.length - 1) : note
-                    .desc;
+                const moreTxt =
+                    note.desc.length > 130 ? note.desc.substring(131, note.desc.length - 1) : note.desc;
 
                 li.innerHTML = `
-                <div class="content">
-                    <h3>${note.title}</h3>
-                    <p>
-                        <span>${desc}</span>
-                        ${note.desc.length > 130 ? `
-                            <span class='more-txt'>${moreTxt}</span>
-                            <span class='dots'>...</span>
-                            <a class='read-text' onclick={readMore(this)}>Read more</a>
-                        ` : ""}
-                    </p>
-                </div>
-                <div class="action-main">
-                    <span onclick={editNote(${note.id})} class="action edit-note"><i class="fa fa-edit"></i></span>
-                    <span onclick={deleteNote(${note.id})} class="action delete-note"><i class="fa fa-trash-o"></i></span>
-                </div>
-            `;
+                    <div class="content">
+                        <h3>${note.title}</h3>
+                        <p>
+                            <span>${desc}</span>
+                            ${note.desc.length > 130 ? `
+                                <span class='more-txt'>${moreTxt}</span>
+                                <span class='dots'>...</span>
+                                <a class='read-text' onclick={readMore(this)}>Read more</a>
+                            ` : ""}
+                        </p>
+                    </div>
+                    <div class="action-main">
+                        <span onclick={editNote(${note.id})} class="action edit-note"><i class="fa fa-edit"></i></span>
+                        <span onclick={deleteNote(${note.id})} class="action delete-note"><i class="fa fa-trash-o"></i></span>
+                    </div>
+                `;
                 noteList.appendChild(li);
             });
         }
