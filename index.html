@@ -2,12 +2,12 @@
 <html lang="en">
 
 <head>
-    <title>Syook - Assignment 1</title>
+    <title>Manage your notes</title>
 
     <!-- Basic meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="Syook - Assignment 1">
+    <meta name="title" content="Manage your notes">
     <meta name="description" content="Manage your notes">
 
     <!-- Shorcut Icon / Favicon -->
@@ -32,7 +32,7 @@
     </header>
 
     <!-- Main Container -->
-    <div class="main-container">
+    <section class="main-container">
         <div id="note-form" class="form-main">
             <div class="note-title-main">
                 <h3 id="note-title">Add Note</h3>
@@ -60,15 +60,15 @@
             </div>
             <ul id="note-list"></ul>
         </div>
-    </div>
+    </section>
 
     <script type="application/javascript">
         let notes = [];
         const noteList = document.getElementById("note-list");
 
-        // Search input Event
+        // Handle search input event
         const searchInput = document.getElementById("search-input");
-        searchInput.addEventListener('input', (e) => {
+        searchInput.addEventListener("input", (e) => {
             if (e.target.value) {
                 const inputVal = e.target.value.toLowerCase();
                 const filteredNotes = notes.filter((n) => n.title.toLowerCase().indexOf(inputVal) > -1 || n.desc
@@ -81,18 +81,18 @@
 
         // Note form cancel btn event
         const cancelBtn = document.getElementById("note-cancel-btn");
-        cancelBtn.addEventListener('click', (e) => {
+        cancelBtn.addEventListener("click", (e) => {
             noteFormAction("hide");
         })
 
         // Note form close btn event
         const closeBtn = document.getElementById("close-form-btn");
-        closeBtn.addEventListener('click', (e) => {
+        closeBtn.addEventListener("click", (e) => {
             noteFormAction("hide");
         })
 
         function noteFormAction(type) {
-            const noteForm = document.getElementById('note-form');
+            const noteForm = document.getElementById("note-form");
             if (type === "show") noteForm.className += " show";
             if (type === "hide") {
                 document.getElementById("title").value = "";
@@ -117,11 +117,11 @@
 
                 title.value = nObj.title;
                 desc.value = nObj.desc;
-                document.getElementById('note-title').innerHTML = "Edit Note";
-                document.getElementById('note-btn').onclick = () => addnote(nObj.id);
-                document.getElementById('note-cancel-btn').onclick = () => cancelEdit(nObj.id);
-                document.getElementById('note-btn').innerHTML = "Edit";
-                document.getElementById('note-form').className += " edit-form";
+                document.getElementById("note-title").innerHTML = "Edit Note";
+                document.getElementById("note-btn").onclick = () => addnote(nObj.id);
+                document.getElementById("note-cancel-btn").onclick = () => cancelEdit(nObj.id);
+                document.getElementById("note-btn").innerHTML = "Edit";
+                document.getElementById("note-form").className += " edit-form";
                 noteFormAction("show");
             }
         }
@@ -133,19 +133,24 @@
                 notes[nIndex].is_update = undefined;
             }
 
-            document.getElementById('note-title').innerHTML = "Add Note";
-            document.getElementById('note-btn').innerHTML = "Add";
-            document.getElementById('note-btn').onclick = () => addnote();
+            document.getElementById("note-title").innerHTML = "Add Note";
+            document.getElementById("note-btn").innerHTML = "Add";
+            document.getElementById("note-btn").onclick = () => addnote();
             document.getElementById("title").value = "";
             document.getElementById("description").value = "";
             noteFormAction("hide");
+        }
+
+        function updateLocalStorage(array) {
+            localStorage.setItem("notes", JSON.stringify(array));
+            renderNotes(array);
         }
 
         function deleteNote(id) {
             const nIndex = notes.findIndex((note) => note.id === id);
 
             if (notes[nIndex].is_update) {
-                alert('Can\'t delete this note because it is in edit mode');
+                alert("Can\"t delete this note because it is in edit mode");
                 return;
             }
 
@@ -155,19 +160,34 @@
             }
         }
 
-        function updateLocalStorage(array) {
-            localStorage.setItem('notes', JSON.stringify(array));
-            renderNotes(array);
+        function readMore(e) {
+            e.closest("li").classList.toggle("read-more");
+            if (e.innerHTML === "Read more") {
+                e.innerHTML = "Read less";
+            } else {
+                e.innerHTML = "Read more";
+            }
         }
 
         function renderNotes(notesAry) {
             noteList.innerHTML = "";
             notesAry.forEach((note) => {
-                const li = document.createElement('li');
+                const li = document.createElement("li");
+                const desc = note.desc.length > 130 ? note.desc.substring(0, 130) : note.desc;
+                const moreTxt = note.desc.length > 130 ? note.desc.substring(131, note.desc.length - 1) : note
+                    .desc;
+
                 li.innerHTML = `
                 <div class="content">
                     <h3>${note.title}</h3>
-                    <p>${note.desc}</p>
+                    <p>
+                        <span>${desc}</span>
+                        ${note.desc.length > 130 ? `
+                            <span class='more-txt'>${moreTxt}</span>
+                            <span class='dots'>...</span>
+                            <a class='read-text' onclick={readMore(this)}>Read more</a>
+                        ` : ""}
+                    </p>
                 </div>
                 <div class="action-main">
                     <span onclick={editNote(${note.id})} class="action edit-note"><i class="fa fa-edit"></i></span>
@@ -216,13 +236,13 @@
             updateLocalStorage(notes);
             noteFormAction("hide");
 
-            title.value = '';
-            desc.value = '';
+            title.value = "";
+            desc.value = "";
             title.focus();
         }
 
         function initNotes() {
-            const notesString = localStorage.getItem('notes') || '';
+            const notesString = localStorage.getItem("notes") || "";
             notes = notesString ? JSON.parse(notesString) : [];
             renderNotes(notes);
         }

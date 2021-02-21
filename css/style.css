@@ -179,6 +179,33 @@ textarea {
     border-bottom: 4px solid #53429b;
 }
 
+.list-main ul>li .content .more-txt {
+    display: none;
+}
+
+.list-main ul>li.read-more .content .more-txt {
+    display: inline;
+}
+
+.list-main ul>li.read-more .content .dots {
+    display: none;
+}
+
+
+.list-main ul>li .content > p {
+    word-break: break-word;
+} 
+
+.list-main ul>li .content .read-text {
+    font-size: 13px;
+    display: block;
+    font-weight: 500;
+    margin-top: 5px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #53429b;
+}
+
 .list-main ul>li .action-main {
     margin-top: 10px;
     display: flex;
@@ -227,6 +254,7 @@ textarea {
     .list-main {
         padding: 0 15px;
         margin-left: 0px;
+        width: 100%;
     }
 
     .form-main {
@@ -268,6 +296,6 @@ textarea {
     }
 
     .list-main {
-        padding: 0px 15px;
+        padding: 0px 5px;
     }
 }
